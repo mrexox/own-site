@@ -14,6 +14,8 @@ func main() {
   router.GET("/api/sections", getSections)
   router.GET("/api/section/:section_id", getPosts)
   router.GET("/api/posts", getPosts)
+
+  
 //  router.GET("api/admin/messages", getMessages) // requires authentication
   http.ListenAndServe(port, router)
 }

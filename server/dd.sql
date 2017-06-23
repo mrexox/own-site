@@ -1,19 +1,19 @@
 --use OWN_SITE_TEST;
-create database OWN_SITE_TEST;
-	use own_site_test;
-drop table if exists section;
+use own_site_test;
+
 drop table if exists post;
+drop table if exists section;
 drop table if exists message;
 drop table if exists admin;
 
 CREATE TABLE section (
-	id INT PRIMARY KEY,
+	id INT PRIMARY KEY AUTO_INCREMENT,
 	name VARCHAR(10) NOT NULL,
-	description VARCHAR(40)
+	description VARCHAR(100)
 );
 
 CREATE TABLE post (
-	id INT PRIMARY KEY,
+	id INT PRIMARY KEY AUTO_INCREMENT,
 	title VARCHAR(40) NOT NULL,
 	content TEXT NOT NULL,
 	created_at TIMESTAMP NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE post (
 );
 
 CREATE TABLE message (
-	id INT PRIMARY KEY,
+	id INT PRIMARY KEY AUTO_INCREMENT,
 	theme VARCHAR(40) NOT NULL,
 	telephone VARCHAR(15),
 	email VARCHAR(20),
@@ -41,3 +41,11 @@ CREATE TABLE admin (
 	login VARCHAR(10) PRIMARY KEY,
 	password_hash INT NOT NULL
 );
+
+INSERT INTO section (name, description) VALUES
+('OOP', 'Just something about object oriented style in programming'),
+('Func', 'Something about functional programming');
+
+INSERT INTO post (title, content, visible, created_at, updated_at, section_id) VALUES
+('OOP in Go', 'Lorem ipsum.', FALSE, now(), now(), 1),
+('Lisp for the web', 'Lorem ipsum.', FALSE, now(), now(), 2);
