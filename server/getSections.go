@@ -29,7 +29,13 @@ func getSections(w http.ResponseWriter, r *http.Request, params httprouter.Param
   var sections []Section
   for rows.Next() {
     var s Section
-    err := rows.Scan(&s.ID, &s.Name, &s.Description)
+    var desc sql.NullString
+    err := rows.Scan(&s.ID, &s.Name, &desc)
+    if desc.Valid {
+      s.Description = desc.String
+    } else {
+      s.Description = ""
+    }
     if err != nil {
       log.Println("Error while scanning rows into Post struct.")
       log.Fatal(err)

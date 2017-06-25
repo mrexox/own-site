@@ -25,7 +25,7 @@ class Logo extends Component {
   render() {
     return (
       <div className='logo'>
-        Web studio<span className={this.state.blinkClass}>|</span>
+        M<span className={this.state.blinkClass}> I</span>
       </div>
     );
   }

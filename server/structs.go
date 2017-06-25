@@ -12,7 +12,7 @@ type Admin struct {
 type Section struct {
   ID string `json:"id"`
   Name string `json:"name"`
-  Description sql.NullString `json:"description"`
+  Description string `json:"description"`
 }
 
 type Post struct {

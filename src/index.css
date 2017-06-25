@@ -1,15 +1,15 @@
 body {
   margin: 0;
   padding: 0;
+  background-color: #ECEFEF ;
   font-family: sans-serif;
 }
 
 .logo {
-  color: white;
+  color: black;
   font-size: 5em;
   display: block;
   text-align: center;
-  font-family: 'Open Sans Condensed', sans-serif;
 }
 
 
@@ -17,19 +17,60 @@ body {
   visibility: hidden;
 }
 
+
+
 .frame {
   position: fixed;
   display: block;
-  background-color: #d7d7d7;
-  width: 90%;
+  background-color: white;
+
+  width: 60%;
   height: 70%;
+
   left: 0;
   right: 0;
   margin: 0 auto;
   margin-top: 40px;
 
-  border-radius: 15px;
-  box-shadow: 0 4px 10px 1px black;
+  padding: 0 10px 0 10px;
+
+}
+
+
+
+@media screen and (max-width: 1200px) {
+  .frame {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .frame {
+    width: 100%;
+  }
+}
+
+.tablinks {
+  padding: 5px 8px;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+}
+.active {
+  background: linear-gradient(180deg, white, #C3ECF2);
+  /*background-color: #C3ECF2;*/
+}
+.tablinks:hover {
+  background-color: #A7E3EC;
+  color: white;
+}
+
+.back {
+  display: inline-block;
+  padding: 5px 10px 5px 10px;
+  border: 1px solid;
+  border-radius: 20px;
+  cursor: pointer;
 }
 
 .footer {
@@ -38,5 +79,4 @@ body {
   left: 0;
   right: 0;
   text-align: center;
-  color: #d7d7d7;
 }
