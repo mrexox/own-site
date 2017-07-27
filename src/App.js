@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import Logo from './Logo';
 import MainFrame from './MainFrame';
 
@@ -9,7 +10,7 @@ class App extends Component {
         <Logo />
         <MainFrame />
         <div className='footer'>
-          Valentine Kiselev (C) 2017
+          Valentine Kiselev (C) {moment().format('YYYY')}
         </div>
       </div>
 

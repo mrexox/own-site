@@ -3,6 +3,7 @@ import Posts from './Posts.js';
 const ORDERS = 0;
 const POSTS = 1;
 const CONTACT = 2;
+const POST = 3;
 
 class MainFrame extends Component {
   constructor(props) {
@@ -49,9 +50,9 @@ class MainFrame extends Component {
     return (
       <div className='frame'>
         <div className='tab'>
-          <button className={ordersClassName} onClick={this.toggleTab}>Orders</button>
-          <button className={postsClassName} onClick={this.toggleTab}>Posts</button>
-          <button className={contactClassName} onClick={this.toggleTab}>Contact</button>
+          <div className={ordersClassName} onClick={this.toggleTab}>Orders</div>
+          <div className={postsClassName} onClick={this.toggleTab}>Posts</div>
+          <div className={contactClassName} onClick={this.toggleTab}>Contact</div>
         </div>
         {tab}
       </div>

@@ -15,6 +15,7 @@ CREATE TABLE section (
 CREATE TABLE post (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	title VARCHAR(40) NOT NULL,
+	description VARCHAR(200),
 	content TEXT NOT NULL,
 	created_at TIMESTAMP NOT NULL,
 	updated_at TIMESTAMP NOT NULL,
@@ -46,6 +47,6 @@ INSERT INTO section (name, description) VALUES
 ('OOP', 'Just something about object oriented style in programming'),
 ('Func', 'Something about functional programming');
 
-INSERT INTO post (title, content, visible, created_at, updated_at, section_id) VALUES
-('OOP in Go', 'Lorem ipsum.', FALSE, now(), now(), 1),
-('Lisp for the web', 'Lorem ipsum.', FALSE, now(), now(), 2);
+INSERT INTO post (title, description, content, visible, created_at, updated_at, section_id) VALUES
+('OOP in Go', 'How to build oop design in golang','Lorem ipsum.', FALSE, now(), now(), 1),
+('Lisp for the web', 'Writing website in Common Lisp','Lorem ipsum.', FALSE, now(), now(), 2);

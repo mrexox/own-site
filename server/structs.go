@@ -18,6 +18,7 @@ type Section struct {
 type Post struct {
   ID string `json:"id"`
   Title string `json:"title"`
+  Description string `json:"description"`
   Text string `json:"text"`
   CreatedAt string `json:"created_at"`
   UpdatedAt string `json:"updated_at"`

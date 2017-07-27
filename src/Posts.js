@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import Post from './Post';
+import moment from 'moment';
 import $ from 'jquery';
 
 const POSTSVIEW = 0;
@@ -22,6 +24,8 @@ class Posts extends Component {
     this.showPosts = this.showPosts.bind(this);
     this.renderSections = this.renderSections.bind(this);
     this.toggleView = this.toggleView.bind(this);
+    this.showAllPosts = this.showAllPosts.bind(this);
+    this.showPost = this.showPost.bind(this);
   }
 
   showPosts(section) {
@@ -30,7 +34,32 @@ class Posts extends Component {
       url: `http://localhost:7000/api/section/${section.id}`,
       method: 'GET',
       success: function(d) {
-        self.setState({posts: d, view: POSTSVIEW});
+        self.setState({section: section.name,
+                       posts: d,
+                       view: POSTSVIEW});
+      },
+      error: function() {console.log('error')}
+    });
+  }
+
+  showPost(post) {
+    this.toggleView(POSTVIEW);
+    this.setState({ post:post});
+  }
+
+  togglePost(post) {
+    console.log(post);
+  }
+
+  showAllPosts() {
+    let self = this;
+    $.ajax({
+      url: 'http://localhost:7000/api/posts',
+      method: 'GET',
+      success: function(d) {
+        self.setState({section: 'All posts',
+                       posts: d,
+                       view: POSTSVIEW});
       },
       error: function() {console.log('error')}
     });
@@ -46,6 +75,15 @@ class Posts extends Component {
           - {section.description}
           </li>
         );
+    sections.push(
+      <li key='all'>
+        <a className='sections__name'
+           onClick={this.showAllPosts}>
+           All Posts
+        </a>
+        - Show all posts ordered by date
+      </li>
+    );
     return (
       <ul className='sections'>
       {sections}
@@ -58,27 +96,45 @@ class Posts extends Component {
   }
 
   renderPosts() {
+    moment.locale('de');
     let posts = this.state.posts.map((post) =>
-      <div className='post' key={post.id}>
-        <div className='post__title'>
-          {post.title}
-        </div>
-        <div className='post__text'>
-          {post.text}
-        </div>
-        <div className='post__date'>
-          {post.created_at}
-        </div>
+      <div className='post-display' key={post.id}>
+      <div className='post-read-btn' onClick={() => this.showPost(post)}></div>
+      <div className='post'>
+        <h3 className='post__title'>
+          <a onClick={this.togglePost.bind(this, post)}>
+            {post.title}
+          </a>
+          </h3>
+        <span className='post__date'>
+            {moment(post.created_at).format('LLLL')}
+        </span>
+        <p className='post__description'
+           dangerouslySetInnerHTML={{__html:post.description}}>
+        </p>
+
+      </div>
       </div>
     );
     return (
       <div className='posts'>
+        <span className='posts__section'>
+          {this.state.section}
+        </span>
         {posts}
         <a  className='back'
             onClick={() => this.toggleView(SECTIONSVIEW)}>
             Back</a>
       </div>
     );
+  }
+
+  renderPost() {
+      return (<div>1 Post<a>{this.state.post.text}</a>
+        <a  className='back'
+            onClick={() => this.toggleView(POSTSVIEW)}>
+            Back</a>
+        </div>)
   }
 
   render() {
@@ -88,7 +144,7 @@ class Posts extends Component {
       case POSTSVIEW:
         return this.renderPosts();
       case POSTVIEW:
-        return (<a>ololo</a>);
+        return <Post post={this.state.post} />
       default:
     }
   }
