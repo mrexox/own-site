@@ -1,0 +1,6 @@
+#!/bin/bash
+
+K=./server/server &
+npm start
+
+echo $K
